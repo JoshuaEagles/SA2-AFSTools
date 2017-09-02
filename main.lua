@@ -1,4 +1,5 @@
 local struct = require "struct"
+require "lfs"
 
 adxForWrite = {}
 
@@ -29,6 +30,8 @@ function writeToAFS()
 	
 end
 
+lfs.mkdir(lfs.currentdir() .. "/workspace")
+lfs.mkdir(lfs.currentdir() .. "/workspace/adx")
 repeat
 	print("type \"r\" to read from AFS file titled \"file.afs\" in /workspace/, or \"w\" to write all ADX files in /workspace/adx to a file called output.afs in /workspace/")
 	inputLine = io.read("*line")
