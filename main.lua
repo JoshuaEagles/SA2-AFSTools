@@ -1,10 +1,10 @@
 local struct = require "struct"
 
-contentsOfAFS = {}
 adxForWrite = {}
 
 function readHeader()
 	nomOfADX = struct.unpack("<I", fileAFS:read(4))
+	local contentsOfAFS = {}
 	for i = 1, nomOfADX do
 		local fileADX = {
 			position = struct.unpack("<I", fileAFS:read(4)),
@@ -12,6 +12,7 @@ function readHeader()
 		} --end fileADX
 		table.insert(contentsOfAFS, fileADX)
 	end --for
+	return contentsOfAFS
 end--readHeader
 
 function getADX() --get files to package into AFS file
@@ -34,8 +35,7 @@ repeat
 	if inputLine == "r" then
 		fileAFS = io.open("file.afs", "rb") --hardcoded, not gonna make a gui for this
 		fileAFS:read(4) -- set the position to just past the intital 4 bytes which are useless
-		readHeader()
-		for i, fileADX in pairs(contentsOfAFS) do
+		for i, fileADX in pairs(readHeader()) do --readHeader returns the length and position of each adx file
 			writeToADX(fileADX, i)
 		end --for
 	elseif inputLine == "w" then
