@@ -21,7 +21,7 @@ end
 
 function writeToADX(fileADX, count)
 	fileAFS:seek("set", fileADX.position)
-	ADXForWrite = assert(io.open("workspace/adx/" .. count .. ".adx", "w"))
+	ADXForWrite = assert(io.open("workspace/adx/" .. count .. ".adx", "wb"))
 	ADXForWrite:write(fileAFS:read(fileADX.length))
 end --writeToADX
 
