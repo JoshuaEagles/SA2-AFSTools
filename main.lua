@@ -33,7 +33,7 @@ repeat
 	print("type \"r\" to read from AFS file titled \"file.afs\" in /workspace/, or \"w\" to write all ADX files in /workspace/adx to a file called output.afs in /workspace/")
 	inputLine = io.read("*line")
 	if inputLine == "r" then
-		fileAFS = io.open("file.afs", "rb") --hardcoded, not gonna make a gui for this
+		fileAFS = io.open("workspace/file.afs", "rb") --hardcoded, not gonna make a gui for this
 		fileAFS:read(4) -- set the position to just past the intital 4 bytes which are useless
 		for i, fileADX in pairs(readHeader()) do --readHeader returns the length and position of each adx file
 			writeToADX(fileADX, i)
