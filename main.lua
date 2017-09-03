@@ -40,8 +40,8 @@ function writeToAFS(i, fileADX) --used for writing
 	newAFS:seek("set", offset)
 	local ADXForRead = io.open("workspace/adx/" .. fileADX[1], "rb")
 	newAFS:write(ADXForRead:read(fileADX[2])) 
-	offset = offset + fileADX[2] + 16 --+ 16 is just incase the last file written somehow ends on a multiple of 512
-	offset = offset + offset % 512 --aligns the offset to a multiple of 512, something about byte boundaries or something, idk
+	offset = offset + fileADX[2]
+	offset = 2048 * (math.floor(offset / 2048) + 1) --aligns the offset to a multiple of 512, something about byte boundaries or something, idk
 end --write to AFS
 
 -- formats a number to four digits eg. 1 > 0001, 27 > 0027, etc
